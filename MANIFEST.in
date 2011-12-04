@@ -1,0 +1,2 @@
+recursive-include passwd/static *	
+recursive-include passwd/templates *

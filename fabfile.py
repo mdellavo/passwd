@@ -23,7 +23,7 @@ def deploy():
                 sudo('mkdir %s' % ETC_DIR)
                 sudo('mkdir %s' % RUN_DIR)
                 sudo('mkdir %s' % LOG_DIR)
-                sudo('cp -f production.ini /etc/uwsgi-python/apps-available/%s.ini' % \
+                sudo('cp -f uwsgi.ini /etc/uwsgi-python/apps-available/%s.ini' % \
                         APP_NAME)
                 sudo(('ln -sf /etc/uwsgi-python/apps-available/%s.ini ' \
                         '/etc/uwsgi-python/apps-enabled/%s.ini') % \
@@ -36,6 +36,7 @@ def deploy():
             sudo('pip install -U -r requirements.txt')
             sudo('python setup.py install')
 
+        sudo('cp production.ini %s' % ETC_DIR)
         sudo('touch %s/reload' % RUN_DIR)
         
         

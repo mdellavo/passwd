@@ -152,5 +152,12 @@
       </div>
 
     </div>
+
+    <div id="footer" class="prepend-top append-bottom small center">
+      Written by <a href="http://marcdellavolpe.com">Marc DellaVolpe</a>. <br/>
+      Source is on Github at 
+      <a href="https://github.com/mdellavo/passwd">https://github.com/mdellavo/passwd</a>
+    </div>
+
   </body>
 </html>

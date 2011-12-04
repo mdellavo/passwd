@@ -80,7 +80,7 @@
               </label><br/>
 
               <select name="min_length">
-                %for i in range(2, 21):
+                %for i in range(2, 13):
                 <option 
                    value="${i}"
 
@@ -96,7 +96,7 @@
               to
 
               <select name="max_length">
-                %for i in range(2, 21):
+                %for i in range(2, 13):
                 <option 
                    value="${i}"
 

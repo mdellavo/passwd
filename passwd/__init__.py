@@ -16,12 +16,12 @@ Markov = markov.Letters(3)
 
 randbool = lambda: random.choice([True, False])
 bool_param = lambda request, param: bool(request.GET.get(param, 'N') in 'Yy')
-int_param = lambda request, param, default: int(request.GET.get('number', default))
+int_param = lambda request, param, default: int(request.GET.get(param, default))
 
 def mkpasswd(min_length=6, max_length=10, add_number=True, 
              alternate_case=True, add_punctuation=True):
 
-    word = Markov.generate(random.randint(min_length,max_length))
+    word = Markov.generate(random.randint(min_length, max_length))
     
     if alternate_case:
         word = ''.join(i.upper() if randbool() else i for i in word)
@@ -53,7 +53,9 @@ def words(request):
     alternate_case = bool_param(request, 'alternate_case')
 
     def passwd():
-        return mkpasswd(add_number=add_number,
+        return mkpasswd(min_length=min_length, 
+                        max_length=max_length,
+                        add_number=add_number,
                         add_punctuation=add_punctuation,
                         alternate_case=alternate_case)
 

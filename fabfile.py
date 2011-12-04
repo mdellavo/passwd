@@ -22,7 +22,7 @@ def deploy():
             with cd(SRC_DIR):
                 sudo('mkdir %s' % ETC_DIR)
                 sudo('mkdir %s' % RUN_DIR)
-                sudo('chown -R www-data:www-data %s' RUN_DIR)
+                sudo('chown -R www-data:www-data %s' % RUN_DIR)
                 sudo('mkdir %s' % LOG_DIR)
                 sudo('cp -f uwsgi.ini /etc/uwsgi-python/apps-available/%s.ini' % \
                         APP_NAME)

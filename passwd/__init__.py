@@ -18,8 +18,10 @@ randbool = lambda: random.choice([True, False])
 bool_param = lambda request, param: bool(request.GET.get(param, 'N') in 'Yy')
 int_param = lambda request, param, default: int(request.GET.get('number', default))
 
-def mkpasswd(add_number=True, alternate_case=True, add_punctuation=True):
-    word = Markov.generate(random.randint(6,10))
+def mkpasswd(min_length=6, max_length=10, add_number=True, 
+             alternate_case=True, add_punctuation=True):
+
+    word = Markov.generate(random.randint(min_length,max_length))
     
     if alternate_case:
         word = ''.join(i.upper() if randbool() else i for i in word)
@@ -41,7 +43,10 @@ def mkpasswd(add_number=True, alternate_case=True, add_punctuation=True):
 @view_config(route_name='words', renderer='json')
 def words(request):
 
-    number = min(int_param(request, 'number', 100), 1000)
+    number = min(int_param(request, 'number', 100), 250)
+
+    min_length = max(int_param(request, 'min_length', 6), 0)
+    max_length = min(int_param(request, 'max_length', 10), 20)
 
     add_number = bool_param(request, 'add_number')
     add_punctuation = bool_param(request, 'add_punctuation')
@@ -61,18 +66,12 @@ def root(request):
 
 def main(global_config, **settings):
 
-    if os.path.exists('/tmp/markov.data'):
-        log.info('Loading markov training')
+    log.info('Training markov...')
 
-        Markov.load('/tmp/markov.data')
-    else: 
-        log.info('Training markov...')
+    Markov.process(open('/usr/share/dict/words'))
+    Markov.normalize()
 
-        Markov.process('/usr/share/dict/words')
-        Markov.normalize()
-        Markov.dump('/tmp/markov.data')
-
-        log.info('Training complete')
+    log.info('Training complete')
 
     config = Configurator(settings=settings)
     config.add_route('root', '/')

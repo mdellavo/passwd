@@ -16,11 +16,29 @@ a:hover {
 }
 
 
-h1 {
+h1, h2, h3 {
     color: #ccccff;
-    text-align: center;
     margin-bottom: 0.25em;
 } 
+
+fieldset {
+    border: none;
+    border-top: 1px solid #fff;
+    margin: 0;
+    padding-bottom: 0;
+}
+
+legend {
+    text-align: center;
+}
+
+.center {
+    text-align: center
+}
+
+.left-align {
+    text-align: left
+}
 
 .words {
     font-family: "Droid Sans Mono", sans-serif;
@@ -46,4 +64,12 @@ h4 {
     font-style: italic;
     margin-bottom: 0.25em;
     text-align: justify;
+}
+
+.word {
+    width: 100%;
+}
+
+.glow {
+    text-shadow: 0 0 10px #fff;    
 }

@@ -34,7 +34,7 @@ def deploy():
         sudo('git pull')
 
         with virtualenv_activate(ENV_DIR):
-            sudo('pip install -U -r requirements.txt')
+            sudo('pip install -r requirements.txt')
             sudo('python setup.py install')
 
         sudo('cp production.ini %s' % ETC_DIR)
